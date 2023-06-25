@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AlertCleanViewController" customModule="WebBrowser" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6TA-Fg-aip">
+                    <rect key="frame" x="56" y="300" width="281" height="252"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clean_alert" translatesAutoresizingMaskIntoConstraints="NO" id="epa-3H-SnT">
+                            <rect key="frame" x="0.0" y="0.0" width="281" height="140"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Close Tabs and Clear Data" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWb-oQ-ZgV">
+                            <rect key="frame" x="44" y="152" width="193" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.40392156862745099" green="0.40392156862745099" blue="0.40392156862745099" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qlo-T3-1TY">
+                            <rect key="frame" x="44" y="185" width="193" height="47"/>
+                            <color key="backgroundColor" red="0.094117647058823528" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" title="Confirm"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="23"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="confirmAction" destination="-1" eventType="touchUpInside" id="foV-L0-nT4"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="HWb-oQ-ZgV" firstAttribute="leading" secondItem="6TA-Fg-aip" secondAttribute="leading" constant="44" id="HUt-nt-BoD"/>
+                        <constraint firstAttribute="bottom" secondItem="Qlo-T3-1TY" secondAttribute="bottom" constant="20" id="K4L-gy-7qi"/>
+                        <constraint firstItem="HWb-oQ-ZgV" firstAttribute="top" secondItem="epa-3H-SnT" secondAttribute="bottom" constant="12" id="LZ9-fV-3jB"/>
+                        <constraint firstItem="epa-3H-SnT" firstAttribute="leading" secondItem="6TA-Fg-aip" secondAttribute="leading" id="Spb-pu-qZr"/>
+                        <constraint firstAttribute="trailing" secondItem="Qlo-T3-1TY" secondAttribute="trailing" constant="44" id="VJ3-BV-Dzk"/>
+                        <constraint firstAttribute="height" constant="252" id="XAw-Zd-h4w"/>
+                        <constraint firstItem="Qlo-T3-1TY" firstAttribute="top" secondItem="HWb-oQ-ZgV" secondAttribute="bottom" constant="16" id="YgO-2O-XT9"/>
+                        <constraint firstItem="epa-3H-SnT" firstAttribute="top" secondItem="6TA-Fg-aip" secondAttribute="top" id="d7T-Ac-eUo"/>
+                        <constraint firstItem="Qlo-T3-1TY" firstAttribute="leading" secondItem="6TA-Fg-aip" secondAttribute="leading" constant="44" id="hgu-Sg-vUp"/>
+                        <constraint firstAttribute="trailing" secondItem="HWb-oQ-ZgV" secondAttribute="trailing" constant="44" id="mAJ-hH-UbU"/>
+                        <constraint firstAttribute="trailing" secondItem="epa-3H-SnT" secondAttribute="trailing" id="sio-PI-dxt"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                            <integer key="value" value="8"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Sh-HK-C37">
+                    <rect key="frame" x="317" y="270" width="20" height="22"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" image="clean_close"/>
+                    <connections>
+                        <action selector="back" destination="-1" eventType="touchUpInside" id="z6T-FN-AE9"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="6TA-Fg-aip" firstAttribute="top" secondItem="0Sh-HK-C37" secondAttribute="bottom" constant="8" id="CEq-0p-pbQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0Sh-HK-C37" secondAttribute="trailing" constant="56" id="GvM-Mn-vfD"/>
+                <constraint firstItem="6TA-Fg-aip" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="56" id="KN3-ra-K6H"/>
+                <constraint firstItem="6TA-Fg-aip" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="j9G-JN-u5Y"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6TA-Fg-aip" secondAttribute="trailing" constant="56" id="x88-LR-Vcl"/>
+            </constraints>
+            <point key="canvasLocation" x="43" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="clean_alert" width="263" height="140"/>
+        <image name="clean_close" width="20" height="20"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
