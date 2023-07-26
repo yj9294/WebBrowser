@@ -104,10 +104,12 @@ extension SettingView {
     func termsAction() {
         dismiss()
         store.dispatch(.homePopTermsView)
+        store.dispatch(.adDisappear(.native))
     }
     func privacyAction() {
         dismiss()
         store.dispatch(.homePopPrivacyView)
+        store.dispatch(.adDisappear(.native))
     }
     func dismiss() {
         offset = -270

@@ -14,13 +14,16 @@ struct CleanView: View {
     }
     var body: some View {
         VStack{
+            HStack{
+                Spacer()
+            }
             Spacer()
             ZStack{
                 Image("clean_bg")
                 Image("clean_animation").rotationEffect(.degrees(degrees))
             }
             Spacer()
-        }.background(Image("launch_bg"))
+        }.background(Image("launch_bg").resizable().ignoresSafeArea())
     }
 }
 

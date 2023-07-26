@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct PrivacyView: View {
+    @EnvironmentObject var store: AppStore
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack {
@@ -98,6 +99,8 @@ struct PrivacyView: View {
 extension PrivacyView {
     func back() {
         dismiss()
+        store.dispatch(.adLoad(.native))
+        store.dispatch(.adLoad(.interstitial))
     }
 }
 

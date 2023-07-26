@@ -53,6 +53,9 @@ struct TabView: View {
                 .padding(.all, 16)
                 Spacer()
             }
+            VStack{
+                NativeView(model: store.state.root.adModel)
+            }.padding(.horizontal, 20).frame(height: 124)
             ZStack {
                 HStack{
                     Spacer()
@@ -94,7 +97,10 @@ extension TabView {
     }
     
     func back() {
+        store.dispatch(.adDisappear(.native))
         dismiss()
+        store.dispatch(.adLoad(.native))
+        store.dispatch(.adLoad(.interstitial))
     }
 }
 

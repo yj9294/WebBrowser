@@ -10,6 +10,7 @@ import Foundation
 enum AppAction {
     case alert(String)
     case dismissKeyborad
+    case dismissController
     case att
     
     case willEnterForground
@@ -53,4 +54,20 @@ enum AppAction {
     
     case event(AppState.FirebaseState.Event, [String:Any]?)
     case property(AppState.FirebaseState.Property, String?)
+    
+    case adRequestConfig
+    case adUpdateConfig(GADConfig)
+    case adUpdateLimit(GADLimit.Status)
+    
+    case adAppear(GADPosition)
+    case adDisappear(GADPosition)
+    
+    case adClean(GADPosition)
+    
+    case adLoad(GADPosition, GADPosition.Position = .home)
+    case adShow(GADPosition, GADPosition.Position = .home, ((GADNativeViewModel)->Void)? = nil)
+    
+    case adNativeImpressionDate(GADPosition.Position = .home)
+    
+    case adModel(GADNativeViewModel)
 }

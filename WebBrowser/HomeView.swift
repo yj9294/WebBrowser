@@ -25,7 +25,7 @@ struct HomeView: View {
                 GeometryReader{ _ in
                     VStack{
                         ZStack{
-                            Image("top").ignoresSafeArea()
+                            Image("top").resizable().ignoresSafeArea()
                             HStack{
                                 TextField("Seaech or enter address", text: $store.state.home.text).onSubmit {
                                     search()
@@ -61,6 +61,11 @@ struct HomeView: View {
                                         })
                                     }
                                 }.padding(.horizontal, 16).padding(.top, 40)
+                                Spacer()
+                                VStack{
+                                    NativeView(model: store.state.root.adModel)
+                                }.padding(.horizontal, 20).frame(height: 124)
+                                Spacer()
                             } else if !store.state.home.isPopTabView {
                                 WebView(webView: store.state.home.browser.webView)
                             }
@@ -175,7 +180,9 @@ extension HomeView {
             store.dispatch(.event(.homeClickSearch, nil))
             store.dispatch(.homeShowCleanAlert(true))
         case .tab:
+            store.dispatch(.adDisappear(.native))
             store.dispatch(.homePopTabView)
+            store.dispatch(.adLoad(.native, .tab))
         case .setting:
             store.dispatch(.homeShowSetting(true))
         }

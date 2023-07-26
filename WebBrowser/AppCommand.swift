@@ -26,9 +26,16 @@ extension AnyCancellable {
     }
 }
 
-func GetRootVC(vc: UIViewController) -> UIViewController {
+func GetRootVC() -> UIViewController {
+    if let scene = UIApplication.shared.connectedScenes.filter({$0 is UIWindowScene}).first as? UIWindowScene, let keyWindow = scene.keyWindow,  let rootVC = keyWindow.rootViewController {
+            return rootVC
+    }
+    return UIViewController()
+}
+
+func getPresentVC(vc: UIViewController) -> UIViewController {
     if let  presentedVC = vc.presentedViewController {
-        return GetRootVC(vc: presentedVC)
+        return getPresentVC(vc: presentedVC)
     } else {
         return vc
     }
@@ -40,14 +47,12 @@ struct AlertCommand: AppCommand {
         self.message = message
     }
     func execute(in store: AppStore) {
-        if let keyWindowScene = UIApplication.shared.connectedScenes.filter({$0 is UIWindowScene}).first as? UIWindowScene, let keyWindow = keyWindowScene.keyWindow, let rootVC = keyWindow.rootViewController {
-            let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-            GetRootVC(vc: rootVC).present(alert, animated: true)
-            Task{
-                if !Task.isCancelled {
-                    try await Task.sleep(nanoseconds: 2_000_000_000)
-                    await alert.dismiss(animated: true)
-                }
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
+        GetRootVC().present(alert, animated: true)
+        Task{
+            if !Task.isCancelled {
+                try await Task.sleep(nanoseconds: 2_000_000_000)
+                await alert.dismiss(animated: true)
             }
         }
     }
@@ -55,15 +60,14 @@ struct AlertCommand: AppCommand {
 
 struct AlertCleanViewCommand: AppCommand {
     func execute(in store: AppStore) {
-        if let keyWindowScene = UIApplication.shared.connectedScenes.filter({$0 is UIWindowScene}).first as? UIWindowScene, let keyWindow = keyWindowScene.keyWindow, let rootVC = keyWindow.rootViewController {
-            let root = GetRootVC(vc: rootVC)
-            let vc = AlertCleanViewController {
-                store.dispatch(.homePopCleanView)
-                store.dispatch(.clean)
-            }
-            vc.modalPresentationStyle = .overCurrentContext
-            root.present(vc, animated: true)
+        let root = GetRootVC()
+        let vc = AlertCleanViewController {
+            store.dispatch(.homePopCleanView)
+            store.dispatch(.clean)
+            store.dispatch(.adDisappear(.native))
         }
+        vc.modalPresentationStyle = .overCurrentContext
+        root.present(vc, animated: true)
     }
 }
 
@@ -72,16 +76,26 @@ struct LaunchingCommand: AppCommand {
     func execute(in store: AppStore) {
         let token = SubscriptionToken()
         var progress = 0.0
-        let duration = 2.65
+        var duration = 15.0
         Timer.publish(every: 0.01, on: .main, in: .common).autoconnect().sink { _ in
             progress += 0.01 / duration
             if progress < 1.0 {
                 store.dispatch(.launchProgress(progress))
             } else {
                 token.unseal()
-                store.dispatch(.appDiDlaunched)
+                store.dispatch(.adShow(.interstitial) { _ in
+                    if store.state.launch.progress >= 0.9 {
+                        store.dispatch(.appDiDlaunched)
+                    }
+                })
+            }
+            
+            if progress > 0.3, store.state.ad.isLoaded(.interstitial) {
+                duration = 0.1
             }
         }.seal(in: token)
+        store.dispatch(.adLoad(.native))
+        store.dispatch(.adLoad(.interstitial))
     }
 }
 
@@ -132,23 +146,45 @@ struct BrowserCommand: AppCommand {
 struct CleanCommand: AppCommand {
     func execute(in store: AppStore) {
         var progress = 0.0
-        let duration = 2.0
+        var duration = 16.0
         let token = SubscriptionToken()
         Timer.publish(every: 0.01, on: .main, in: .common).autoconnect().sink { _ in
             progress += 0.01 / duration
             store.dispatch(.cleanDegress(progress * 360))
+            
+            if !store.state.root.appLaunced || store.state.root.appEnterbackground {
+                token.unseal()
+                appCleaned(in: store, isBackground: true)
+                return
+            }
             if progress > duration {
                 token.unseal()
-                store.dispatch(.cleanDismiss)
-                store.dispatch(.browserClean)
-                store.dispatch(.browser)
-                store.dispatch(.event(.cleanAnimationCompletion, nil))
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
-                    store.dispatch(.alert("Cleaned"))
-                    store.dispatch(.event(.cleanCompletionAlertShow, ["bro": "2"]))
-                }
+                store.dispatch(.adShow(.interstitial) { _ in
+                    appCleaned(in: store, isBackground: false)
+                })
+            }
+            if progress > 0.2, store.state.ad.isLoaded(.interstitial) {
+                duration = 0.1
             }
         }.seal(in: token)
+        store.dispatch(.adLoad(.interstitial))
+    }
+    
+    func appCleaned(in store: AppStore, isBackground: Bool) {
+        store.dispatch(.cleanDismiss)
+        store.dispatch(.browserClean)
+        store.dispatch(.browser)
+        store.dispatch(.event(.cleanAnimationCompletion, nil))
+        if !isBackground {
+            store.dispatch(.adLoad(.native))
+            store.dispatch(.adLoad(.interstitial))
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5){
+            if store.state.root.appLaunced {
+                store.dispatch(.alert("Cleaned"))
+                store.dispatch(.event(.cleanCompletionAlertShow, ["bro": "2"]))
+            }
+        }
     }
 }
 
@@ -158,9 +194,7 @@ struct ShareCommand: AppCommand {
         let vc = UIActivityViewController(
            activityItems: [url],
            applicationActivities: nil)
-        if let keyWindowScene = UIApplication.shared.connectedScenes.filter({$0 is UIWindowScene}).first as? UIWindowScene, let keyWindow = keyWindowScene.keyWindow, let rootVC = keyWindow.rootViewController {
-            GetRootVC(vc: rootVC).present(vc, animated: true)
-        }
+        GetRootVC().present(vc, animated: true)
     }
 }
 
@@ -198,6 +232,21 @@ struct ATTCommand: AppCommand {
             if !Task.isCancelled {
                 try await Task.sleep(nanoseconds: 2_000_000_000)
                 await ATTrackingManager.requestTrackingAuthorization()
+            }
+        }
+    }
+}
+
+struct DismissControllerCommand: AppCommand {
+    func execute(in store: AppStore) {
+        let vc = GetRootVC()
+        if let presentedVC = vc.presentedViewController {
+            if let p = presentedVC.presentedViewController {
+                p.dismiss(animated: true) {
+                    presentedVC.dismiss(animated: true)
+                }
+            } else {
+                presentedVC.dismiss(animated: true)
             }
         }
     }

@@ -26,6 +26,10 @@ struct ContentView: View {
             viewWillEnterForeground()
         }.onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
             viewDidEnterBackground()
+        }.onReceive(NotificationCenter.default.publisher(for: .nativeAdLoadCompletion)) { noti in
+            if let ad = noti.object as? GADNativeViewModel {
+                loadCompletion(ad)
+            }
         }
     }
 }
@@ -34,13 +38,19 @@ struct ContentView: View {
 extension ContentView {
     
     func viewWillEnterForeground() {
+        store.dispatch(.dismissController)
         store.dispatch(.willEnterForground)
         store.dispatch(.appWilllaunching)
         store.dispatch(.event(.openHot, nil))
     }
     
     func viewDidEnterBackground() {
+        store.dispatch(.adDisappear(.native))
         store.dispatch(.didEnterBackground)
+    }
+    
+    func loadCompletion(_ ad: GADNativeViewModel) {
+        store.dispatch(.adModel(ad))
     }
     
 }

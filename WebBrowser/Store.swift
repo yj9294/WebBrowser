@@ -12,6 +12,7 @@ class AppStore: ObservableObject {
     @Published var state: AppState = AppState()
     var bags = [AnyCancellable]()
     init(){
+        dispatch(.adRequestConfig)
         dispatch(.appWilllaunching)
         dispatch(.property(.local, nil))
         dispatch(.event(.open, nil))
@@ -41,6 +42,8 @@ extension AppStore{
             appCommand = DismissKeyboardCommand()
         case .att:
             appCommand = ATTCommand()
+        case .dismissController:
+            appCommand = DismissControllerCommand()
             
         case .willEnterForground:
             appState.root.appEnterbackground = false
@@ -133,6 +136,29 @@ extension AppStore{
             appCommand = FirebaseCommand(event: key, parameter: parameters, property: nil, value: nil)
         case .property(let key, let value):
             appCommand = FirebaseCommand(event: nil, parameter: nil, property: key, value: value)
+            
+        case .adRequestConfig:
+            appCommand = GADRemoteConfigCommand()
+        case .adUpdateConfig(let config):
+            appState.ad.config = config
+        case .adUpdateLimit(let state):
+            appCommand = GADUpdateLimitCommand(state)
+        case .adAppear(let position):
+            appCommand = GADAppearCommand(position)
+        case .adDisappear(let position):
+            appCommand = GADDisappearCommand(position)
+        case .adClean(let position):
+            appCommand = GADCleanCommand(position)
+        
+        case .adLoad(let position, let p):
+            appCommand = GADLoadCommand(position, p)
+        case .adShow(let position, let p, let completion):
+            appCommand = GADShowCommand(position, p, completion)
+            
+        case .adNativeImpressionDate(let p):
+            appState.ad.impressionDate[p] = Date()
+        case .adModel(let model):
+            appState.root.adModel = model
 
         }
         return (appState, appCommand)

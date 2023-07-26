@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TermsView: View {
+    @EnvironmentObject var store: AppStore
     @Environment(\.dismiss) private var dismiss
     var body: some View {
         ZStack {
@@ -45,6 +46,8 @@ struct TermsView: View {
 
 extension TermsView {
     func back() {
+        store.dispatch(.adLoad(.native))
+        store.dispatch(.adLoad(.interstitial))
         dismiss()
     }
 }
