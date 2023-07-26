@@ -23,7 +23,6 @@
 		C70EF0AE2A403F3B00FB48A4 /* PrivacyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70EF0AD2A403F3B00FB48A4 /* PrivacyView.swift */; };
 		C70EF0B02A403F4000FB48A4 /* TermsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70EF0AF2A403F4000FB48A4 /* TermsView.swift */; };
 		C70EF0B22A403F7800FB48A4 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70EF0B12A403F7800FB48A4 /* TabView.swift */; };
-		C7698D8F2A495D91005D9B05 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7698D8E2A495D91005D9B05 /* GoogleService-Info.plist */; };
 		C7698D912A495E74005D9B05 /* admob.json in Resources */ = {isa = PBXBuildFile; fileRef = C7698D902A495E74005D9B05 /* admob.json */; };
 		C7698D942A495EF6005D9B05 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = C7698D932A495EF6005D9B05 /* GoogleMobileAds */; };
 		C7698D962A49600B005D9B05 /* GADLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7698D952A49600B005D9B05 /* GADLoad.swift */; };
@@ -33,6 +32,7 @@
 		C7760FE12A40622700E19709 /* AlertCleanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7760FDF2A40622700E19709 /* AlertCleanViewController.swift */; };
 		C7760FE22A40622700E19709 /* AlertCleanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C7760FE02A40622700E19709 /* AlertCleanViewController.xib */; };
 		C7760FE62A40811700E19709 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7760FE52A40811700E19709 /* SettingView.swift */; };
+		C7A970212A70F89F00C111A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C7A970202A70F89F00C111A1 /* GoogleService-Info.plist */; };
 		C7D7BA642A413CB90054C791 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D7BA632A413CB80054C791 /* Firebase.swift */; };
 		C7D7BA672A413D850054C791 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = C7D7BA662A413D850054C791 /* FirebaseAnalytics */; };
 		C7D7BA692A413D850054C791 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = C7D7BA682A413D850054C791 /* FirebaseCrashlytics */; };
@@ -62,7 +62,6 @@
 		C70EF0AD2A403F3B00FB48A4 /* PrivacyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyView.swift; sourceTree = "<group>"; };
 		C70EF0AF2A403F4000FB48A4 /* TermsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsView.swift; sourceTree = "<group>"; };
 		C70EF0B12A403F7800FB48A4 /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
-		C7698D8E2A495D91005D9B05 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7698D902A495E74005D9B05 /* admob.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = admob.json; sourceTree = "<group>"; };
 		C7698D952A49600B005D9B05 /* GADLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADLoad.swift; sourceTree = "<group>"; };
 		C7698D972A498405005D9B05 /* GADCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GADCommand.swift; sourceTree = "<group>"; };
@@ -71,6 +70,7 @@
 		C7760FDF2A40622700E19709 /* AlertCleanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCleanViewController.swift; sourceTree = "<group>"; };
 		C7760FE02A40622700E19709 /* AlertCleanViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertCleanViewController.xib; sourceTree = "<group>"; };
 		C7760FE52A40811700E19709 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		C7A970202A70F89F00C111A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C7D7BA632A413CB80054C791 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -113,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				C7698D902A495E74005D9B05 /* admob.json */,
-				C7698D8E2A495D91005D9B05 /* GoogleService-Info.plist */,
+				C7A970202A70F89F00C111A1 /* GoogleService-Info.plist */,
 				C70EF0A62A401F7D00FB48A4 /* Info.plist */,
 				C70EF08A2A3FF25E00FB48A4 /* WebBrowserApp.swift */,
 				C70EF0A72A4031D300FB48A4 /* Browser.swift */,
@@ -226,8 +226,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C70EF0A52A4002DE00FB48A4 /* Launch Screen.storyboard in Resources */,
+				C7A970212A70F89F00C111A1 /* GoogleService-Info.plist in Resources */,
 				C70EF0922A3FF25F00FB48A4 /* Preview Assets.xcassets in Resources */,
-				C7698D8F2A495D91005D9B05 /* GoogleService-Info.plist in Resources */,
 				C7698D912A495E74005D9B05 /* admob.json in Resources */,
 				C70EF08F2A3FF25F00FB48A4 /* Assets.xcassets in Resources */,
 				C7760FE22A40622700E19709 /* AlertCleanViewController.xib in Resources */,
