@@ -14,15 +14,15 @@
 	<key>FacebookAdvertiserIDCollectionEnabled</key>
 	<true/>
 	<key>FacebookAppID</key>
-	<string></string>
+	<string>150770778005388</string>
 	<key>FacebookAutoLogAppEventsEnabled</key>
 	<true/>
 	<key>FacebookClientToken</key>
-	<string></string>
+	<string>d11d2af1f0e90749fbded18218d0f4b2</string>
 	<key>FacebookDisplayName</key>
 	<string>WebBrowser</string>
 	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-3940256099942544~1458002511</string>
+	<string>ca-app-pub-7024276924616287~1629028121</string>
 	<key>GADIsAdManagerApp</key>
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
