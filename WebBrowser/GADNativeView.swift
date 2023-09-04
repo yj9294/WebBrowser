@@ -138,7 +138,7 @@ extension UINativeAdView {
     func refreshUI(ad: GADNativeAd? = nil) {
         self.nativeAd = ad
         self.backgroundColor = .white
-        placeholderView.image = UIImage(named: "ad_placeholder")
+//        placeholderView.image = UIImage(named: "ad_placeholder")
         self.adView.image = UIImage(named: "ad_tag")
         self.installLabel.setTitleColor(.white, for: .normal)
         self.installLabel.backgroundColor = UIColor(named: "#187AFF")
